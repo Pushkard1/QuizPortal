@@ -21,13 +21,14 @@ export default function PageWithJSbasedForm() {
         const JSONdata = JSON.stringify(data)
 
         // Send the form data to our API and get a response.
-        const response = await fetch('/api/form', {
+        const response = await fetch('http://localhost:8081/user/', {
             // Body of the request is the JSON data we created above.
             body: JSONdata,
 
             // Tell the server we're sending JSON.
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             
             method: 'POST',
