@@ -29,20 +29,16 @@ export default function PageWithJSbasedForm() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            // The method is POST because we are sending data.
+            
             method: 'POST',
         })
 
-        // Get the response data from server as JSON.
-        // If server returns the name submitted, that means the form works.
+        
         const result = await response.json()
         alert(`Is this your full name: ${result.data}`)
     }
     return (
-        <div className="container">
-
-
-
+        <div>
             <form onSubmit={registerUser}>
                 <section className="vh-100 gradient-custom">
                     <div className="container py-5 h-100">
@@ -51,7 +47,7 @@ export default function PageWithJSbasedForm() {
                                 <div className="card shadow-2-strong card-registration" style={{ border_radius: "15px" }}>
                                     <div className="card-body p-4 p-md-5">
                                         <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-                                        <form>
+                                        
 
                                             <div className="row">
                                                 <div className="col-md-6 mb-4">
@@ -115,7 +111,7 @@ export default function PageWithJSbasedForm() {
 
                                             </div>
 
-                                        </form>
+                                        
                                     </div>
                                 </div>
                             </div>
