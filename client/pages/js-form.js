@@ -33,10 +33,12 @@ export default function PageWithJSbasedForm() {
             
             method: 'POST',
         })
-
+        
+        console.log(response)
         
         const result = await response.json()
-        alert(`Is this your full name: ${result.data}`)
+        
+        alert(`Is this your full name: ${result.firstName} ${result.lastName}`)
     }
     return (
         <div>
@@ -106,13 +108,24 @@ export default function PageWithJSbasedForm() {
 
                                                 </div>
                                             </div>
+                                            <div className='row'>
 
-                                            <div className="mt-4 pt-2">
-                                                <input className="btn btn-primary btn-lg" type="submit" value="Submit" />
+                                                <div className="col-md-auto">
+                                                    <input className="btn btn-primary btn-lg" type="submit" value="Submit" />
+                                                    
 
+                                                </div>
+                                                <div className="col-md-auto">
+                                                    <h5>OR Proceed to </h5>
+                                                </div>
+                                                
+                                                <div className="col-md-auto">
+                                                    <Link href="/login">
+                                                        <input className="btn btn-primary btn-lg" type="submit" value="Login" />
+                                                    </Link>
+
+                                                </div>
                                             </div>
-
-                                        
                                     </div>
                                 </div>
                             </div>
