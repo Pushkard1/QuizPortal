@@ -1,8 +1,13 @@
 import Head from 'next/head'
 import PageWithJSbasedForm from './js-form'
 import styles from '../styles/Home.module.css'
+import { getSession } from 'next-auth/react'
+import Login from './login'
+
 
 export default function Home() {
+ 
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,11 +17,13 @@ export default function Home() {
       </Head>
 
       
-        <PageWithJSbasedForm/>
-        
+      <Login/>
+      
       
 
       
     </div>
   )
 }
+
+

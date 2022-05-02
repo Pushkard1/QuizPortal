@@ -1,27 +1,40 @@
+import { getSession, signIn } from 'next-auth/react';
 import Link from 'next/link'
+import { useRouter } from 'next/router';
 
 export default Login;
 
-function Login() {
+function Login({ session }) {
+  const router = useRouter();
     const loginUser = async (event) =>{
-        event.preventDefault()
 
-        const data = {
+      const res = await signIn('credentials',{
+        
+            redirect: false,
             username: event.target.username.value,
-            password: event.target.password.value
-        }
-        const JSONdata = JSON.stringify(data)
-        const tokenGeneration = await fetch('http://localhost:8081/generate-token',{
-            body: JSONdata,
+            password: event.target.password.value});
 
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-            method: 'POST'
-        })
+      
+      
+        // event.preventDefault()
 
-        const token = await tokenGeneration.json()
+        // const data = {
+        //     username: event.target.username.value,
+        //     password: event.target.password.value
+        // }
+        // const JSONdata = JSON.stringify(data)
+        // const tokenGeneration = await fetch('http://localhost:8081/generate-token',{
+        //     body: JSONdata,
+
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Access-Control-Allow-Origin': '*'
+        //     },
+        //     method: 'POST'
+        // })
+
+        // const token = await tokenGeneration.json()
+        // console.log(token)
     }
 
     return (
@@ -39,38 +52,38 @@ function Login() {
                       <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">
                         Registration Form
                       </h3>
-                      <div class="col-md-6 mb-4">
+                      <div className="col-md-6 mb-4">
                         <input
                           type="text"
                           id="username"
                           className="form-control"
                           name="username"
                         />
-                        <label className="form-label" for="form2Example1">
+                        <label className="form-label" htmlFor="form2Example1">
                           Username
                         </label>
                       </div>
 
-                      <div class="col-md-6 mb-4">
+                      <div className="col-md-6 mb-4">
                         <input
                           type="password"
                           id="form2Example2"
-                          class="form-control"
+                          className="form-control"
                           name='password'
                         />
-                        <label class="form-label" for="form2Example2">
+                        <label className="form-label" htmlFor="form2Example2">
                           Password
                         </label>
                       </div>
 
                       <button
-                        type="button"
-                        class="btn btn-primary btn-block mb-4"
+                        type="submit"
+                        className="btn btn-primary btn-block mb-4"
                       >
                         Sign in
                       </button>
 
-                      <div class="text-center">
+                      <div className="text-center">
                         <Link href="/js-form">
                           <input
                             className="btn btn-primary btn-lg"
@@ -88,4 +101,11 @@ function Login() {
         </form>
       </div>
     );
+}
+
+export async function getServerSideProps(context){
+  const session = await getSession(context);
+  return{
+    props : { session }
+  }
 }
