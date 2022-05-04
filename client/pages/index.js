@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import PageWithJSbasedForm from './js-form'
 import styles from '../styles/Home.module.css'
 import { getSession } from 'next-auth/react'
 import Login from './login'

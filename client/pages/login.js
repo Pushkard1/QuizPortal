@@ -8,7 +8,7 @@ export default Login;
 function Login({ session }) {
     
     const loginUser = async (event) =>{
-      
+      event.preventDefault();
       const res = await signIn('credentials',{
         
             redirect: false,
@@ -16,13 +16,12 @@ function Login({ session }) {
             password: event.target.password.value
           });
         
-  
-      console.log("hiii");
+        console.log(res)
     }
 
     return (
       <div>
-        <form onSubmit={loginUser}>
+        <form onSubmit={loginUser} >
           <section className="vh-100 gradient-custom">
             <div className="container py-5 h-100">
               <div className="row justify-content-center align-items-center h-100">
