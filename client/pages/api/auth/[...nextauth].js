@@ -10,9 +10,10 @@ export default NextAuth({
             password: {  label: "password", type: "password" }
           },
             async authorize(credentials,req) {
+              
                 // Here call your API with data passed in the login form
                 //const token = await loginEndpoint(credentials);
-                const tokenGeneration = await fetch('http://localhost:8081/generate-token',{
+                const token = await fetch('http://localhost:8081/generate-token',{
                 body: JSON.stringify(credentials),
 
                 headers: {
@@ -22,42 +23,44 @@ export default NextAuth({
                 method: 'POST'
                 })
 
-        const token = await tokenGeneration.json()
-        console.log(token)
-      
-            if (token) {
-              return token
+        const user = await token.json()
+        console.log(user)
+            if (user) {
+              
+              return user
             } else {
               return null
             }
+            
           }
         })
       ],
       callbacks: {
-        async jwt({ token, user, account }) {
-          if (account && user) {
-            return {
-              ...token,
-              accessToken: user.token,
+        async jwt({ token, user }) {
+          if (user) {
+           
+              token.accessToken = user.token
               
-            };
           }
     
           return token;
         },
     
         async session({ session, token }) {
-          session.user.token = token.token;
-            
+          session.accessToken = token.accessToken;
+          
+          
           return session;
         },
       },
+      
       pages: {
         signIn: '/login',
       },
       
       session: {
-        strategy : "jwt"
+        jwt: true,
+        strategy: 'jwt'
       }
       
 })

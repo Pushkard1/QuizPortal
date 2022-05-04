@@ -5,7 +5,7 @@ import { getSession } from 'next-auth/react'
 import Login from './login'
 
 
-export default function Home() {
+export default function Home({ }) {
  
 
   return (
@@ -26,4 +26,9 @@ export default function Home() {
   )
 }
 
-
+export async function getServerSideProps(context){
+  const session = await getSession(context);
+  return{
+    props : { session }
+  }
+}

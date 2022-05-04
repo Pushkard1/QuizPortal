@@ -1,40 +1,23 @@
 import { getSession, signIn } from 'next-auth/react';
 import Link from 'next/link'
 import { useRouter } from 'next/router';
+import Quizzes from './quizzes';
 
 export default Login;
 
 function Login({ session }) {
-  const router = useRouter();
+    
     const loginUser = async (event) =>{
-
+      
       const res = await signIn('credentials',{
         
             redirect: false,
             username: event.target.username.value,
-            password: event.target.password.value});
-
-      
-      
-        // event.preventDefault()
-
-        // const data = {
-        //     username: event.target.username.value,
-        //     password: event.target.password.value
-        // }
-        // const JSONdata = JSON.stringify(data)
-        // const tokenGeneration = await fetch('http://localhost:8081/generate-token',{
-        //     body: JSONdata,
-
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Access-Control-Allow-Origin': '*'
-        //     },
-        //     method: 'POST'
-        // })
-
-        // const token = await tokenGeneration.json()
-        // console.log(token)
+            password: event.target.password.value
+          });
+        
+  
+      console.log("hiii");
     }
 
     return (
@@ -53,27 +36,29 @@ function Login({ session }) {
                         Registration Form
                       </h3>
                       <div className="col-md-6 mb-4">
+                        
+                        <label className="username" htmlFor="username">
+                          Username
+                        </label>
                         <input
                           type="text"
                           id="username"
-                          className="form-control"
+                          className="username"
                           name="username"
                         />
-                        <label className="form-label" htmlFor="form2Example1">
-                          Username
-                        </label>
                       </div>
 
                       <div className="col-md-6 mb-4">
-                        <input
-                          type="password"
-                          id="form2Example2"
-                          className="form-control"
-                          name='password'
-                        />
-                        <label className="form-label" htmlFor="form2Example2">
+                        
+                        <label className="password" htmlFor="password">
                           Password
                         </label>
+                        <input
+                          type="password"
+                          id="password"
+                          className="password"
+                          name='password'
+                        />
                       </div>
 
                       <button
