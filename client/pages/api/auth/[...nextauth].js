@@ -33,7 +33,6 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      
       if (user) {
         token.accessToken = user.token;
       }
@@ -42,7 +41,6 @@ export default NextAuth({
     },
 
     async session({ session, token }) {
-      
       session.accessToken = token.accessToken;
 
       return session;
@@ -51,6 +49,11 @@ export default NextAuth({
 
   pages: {
     signIn: "/login",
+  },
+  options: {
+    jwt: {
+      maxAge: 60 * 60 * 24 * 30,
+    },
   },
 
   session: {

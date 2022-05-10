@@ -1,12 +1,9 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import { getSession } from 'next-auth/react'
-import Login from './login'
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import { getSession } from "next-auth/react";
+import Login from "./login";
 
-
-export default function Home({ }) {
- 
-
+export default function Home({}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -15,19 +12,14 @@ export default function Home({ }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
-      <Login/>
-      
-      
-
-      
+      <Login />
     </div>
-  )
+  );
 }
 
-export async function getServerSideProps(context){
+export async function getServerSideProps(context) {
   const session = await getSession(context);
-  return{
-    props : { session }
-  }
+  return {
+    props: { session },
+  };
 }
