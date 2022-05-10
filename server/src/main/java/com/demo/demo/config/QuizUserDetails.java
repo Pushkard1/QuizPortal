@@ -11,12 +11,16 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
-public class QuizUserDetails implements UserDetails {
+public class QuizUserDetails implements UserDetails  {
     @Autowired
     private User user;
 
     public QuizUserDetails(User user) {
         this.user = user;
+    }
+
+    public String getPhone(){
+        return user.getPhone();
     }
 
     @Override

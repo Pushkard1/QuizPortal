@@ -47,8 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
         http
                 .csrf()
                 .disable()
-                .cors()
-                .disable()
+
                 .authorizeRequests()
                 .antMatchers("/generate-token","/user/").permitAll()
                 .anyRequest().authenticated()
@@ -58,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.cors();
     }
 
     @Override

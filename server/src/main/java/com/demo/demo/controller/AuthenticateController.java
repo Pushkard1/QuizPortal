@@ -9,11 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
+@CrossOrigin("http://localhost:3000/")
 public class AuthenticateController {
 
     @Autowired
@@ -49,5 +50,11 @@ public class AuthenticateController {
         }catch (BadCredentialsException e){
             throw new Exception("Invalid Credentials "+e.getMessage());
         }
+    }
+
+    @GetMapping("/current-user")
+    public UserDetails getCurrentUser(Principal principal){
+
+        return userDetailsService.loadUserByUsername(principal.getName());
     }
 }
